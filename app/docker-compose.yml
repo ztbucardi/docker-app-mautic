@@ -1,0 +1,23 @@
+mautic.db:
+  container_name: mautic.db
+  hostname: mautic-db
+  #restart: always
+  image: mysql:5.6
+  volumes:
+   - ../volumes/db:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: zayth123
+
+
+mautic.app:
+  container_name: mautic.app
+  hostname: mautic.app
+  #restart: always
+  image: zaytech/mautic:1.0.20160705
+  volumes:
+   - ../volumes/nginx/mautic.conf:/etc/nginx/conf.d/default.conf
+   - ../volumes/supervisord/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+  links:
+    - mautic.db:db
+  ports:
+    - 80:80
