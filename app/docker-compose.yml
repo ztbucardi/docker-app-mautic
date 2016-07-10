@@ -13,10 +13,11 @@ mautic.app:
   container_name: mautic.app
   hostname: mautic.app
   #restart: always
-  image: zaytech/mautic:1.0.20160705
+  image: zaytech/mautic-exemplo:1.0
   volumes:
    - ../volumes/nginx/mautic.conf:/etc/nginx/conf.d/default.conf
    - ../volumes/supervisord/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+   - ../volumes/cron/mautic:/etc/cron.d/mautic
   links:
     - mautic.db:db
   ports:
